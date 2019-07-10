@@ -17,6 +17,7 @@ You have to declare scope value as prototype in order to create multiple instanc
 
 Location of JSP
 Create src>> main>> webapp >> home.jsp
+Default Spring Boot >> JSp as download>> @ResponseBody : String as a response >> tomcat JAsper will render the JSP page
 
 @Component
 @Scope(value="prototype")
