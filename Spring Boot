@@ -1,0 +1,783 @@
+Spring Boot
+•	Spring Framework can integrate with Hibernate and Struts
+•	Spring Boot will give you dependency and configuration
+•	SB will give you production ready app
+•	Jar files will have embedded tomcat
+•	Class with Auto wired property can be connected to component class	
+•	application.properties
+Spring Starter Project in STS >> will download project from start.spring.io
+Spring framework enables dependency injection using getBean method
+If we want to create spring bean (using getBean method to return the object of class), we have to make class as “Component”
+Singleton Design Pattern: By default spring framework will give you the object. The moment you start the application, you will get the object ready to use. Even if you create multiple instances, it will call the constructor only once.
+
+In Singleton Design Pattern, you will get only one obj and that too is prehand(the moment you start your app)
+By default spring frame work uses singleton design pattern: You will get only one instance.
+You have to declare scope value as prototype in order to create multiple instances. . Now if you create multiple instances, it will call make the multiple calls to constructor.
+@Component
+@Scope(value="prototype")
+public class Students 
+{
+    
+	String sname;
+	int roll;
+	int marks;
+	public Students() {
+		super();
+		System.out.println("Object Created");
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+	public int getRoll() {
+		return roll;
+	}
+	public void setRoll(int roll) {
+		this.roll = roll;
+	}
+	public int getMarks() {
+		return marks;
+	}
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+	public void show()
+	{
+		System.out.println("Display here.. Spring Boot App...");
+	}
+	
+}
+@SpringBootApplication
+public class SpringBootRest2Application {
+
+	public static void main(String[] args) {
+		
+	ConfigurableApplicationContext con = 
+			SpringApplication.run(SpringBootRest2Application.class, args);
+	Students stud1 = con.getBean(Students.class);
+	stud1.show();
+	
+	Students stud2 = con.getBean(Students.class);
+	stud2.show();
+	
+	}
+}
+
+
+By default , @Autowired searches by type
+@Autowired property has to be connected to @Component Class
+@Qualifier searches by name 
+
+@Autowired connected to @Component
+package com.example.demo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+@Component
+public class Students 
+{
+    
+	String sname;
+	int roll;
+	int marks;
+	@Autowired
+	@Qualifier("lap1")
+	
+	Laptop laptop;
+	public Students() {
+		super();
+		System.out.println("Object Created");
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+	public int getRoll() {
+		return roll;
+	}
+	public void setRoll(int roll) {
+		this.roll = roll;
+	}
+	public int getMarks() {
+		return marks;
+	}
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+	
+	public Laptop getLaptop() {
+		return laptop;
+	}
+	public void setLaptop(Laptop laptop) {
+		this.laptop = laptop;
+	}
+	public void show()
+	{
+		System.out.println("Display here.. Spring Boot App...");
+		String p = laptop.lshow();
+		System.out.println(p);
+		
+	}
+	
+}
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+
+@Component("lap1")
+public class Laptop {
+	
+	int lid;
+	String name;
+	public int getLid() {
+		return lid;
+	}
+	public void setLid(int lid) {
+		this.lid = lid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String lshow() {
+		return "Laptop lshow";
+	}
+	
+
+}
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class SpringBootRest2Application {
+
+	public static void main(String[] args) {
+		
+	ConfigurableApplicationContext con = 
+			SpringApplication.run(SpringBootRest2Application.class, args);
+	Students stud = con.getBean(Students.class);
+	stud.show();
+	}
+}
+
+
+By Default STS doesn’t support JSP, we have to add Tomcat Jasper to pom.xml
+Spring Boot is well suited for REST applications
+
+<dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jasper</artifactId>
+            <version>8.5.34</version>
+</dependency>
+
+
+Using Model and View and Removing HTTPServletRequest
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+@Controller
+public class HomeController 
+{
+     @RequestMapping("home")	
+     public ModelAndView home(String name,HttpSession session)
+     {
+    	ModelAndView mv  = new ModelAndView();
+    	mv.addObject("name", name);
+    	mv.setViewName("display");
+    	
+    	return mv;
+    }
+}
+<%@page import="org.springframework.web.bind.annotation.CookieValue"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isELIgnored="false"  %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+ 
+ 
+    Welcome ${name}
+    
+    
+</body>
+</html>
+http://localhost:8080/home?roll=101&name=sachin&grade=A
+Spring JPA enables CRUD Repository (Interface) using which we can directly access Save, Update, Delete Methods
+
+@RequestMapping("students")
+@ResponseBody   >> Don’t search for view name, directly print the data
+
+public String showall() 
+{
+	return  repo.findAll().toString();
+}
+
+JpaRepository<T, ID> extends PagingAndSortingRepository
+PagingAndSortingRepository<T, ID> extends CrudRepository
+
+Annotations
+@ResponseBody : When controller class method is returning text instead of jsp page
+@RequestBody  : When we are using Body in postman for sending post request to controller class method
+
+@PostMapping("showall")
+	@ResponseBody
+	public Student addstud(@RequestBody Student s) 
+	{
+	   repo.save(s);
+	   System.out.println(s);
+	   return s;
+	}
+
+
+@PostMapping("students") :  for getting the post request 
+@Autowired : To instantiate automatically , It can be connected to component
+@RequestMapping("students") : For Get Request  OR @GetMapping
+@Controller : To create controller class 
+@RestController : @RequestMapping is not needed with @RestController
+
+1) The @RequestParam is used to extract query parameters while @PathVariable(@PathParam for REST ) is used to extract data right from the URI.
+2) @RequestParam is more useful on a traditional web application where data is mostly passed in the query abatements while @PathVariable is more suitable for RESTful web services where URL contains values 
+
+@PathVariable
+From URL: 
+@RequestMapping("/students/{roll}")
+@ResponseBody
+public Optional<Students> showallid(@PathVariable("roll")int roll) 
+{
+	return  repo.findById(roll);
+}
+@RequestMapping("delStud")
+public String delStud(@RequestParam int roll)
+{
+	repo.deleteById(roll);
+	return "display.jsp";
+}
+
+
+
+
+
+
+
+
+
+2nd Revise:
+EJB to spring:
+Java Enterprise project using EJB: Difficult to manage and they were entities heavy weight >>same features can be achieved using POJO
+In spring framework
+Spring Features: Dependency Injection, POJO, MVC, REST, Security, AOP, Data, Batch
+•	Can be integrated with Hibernate, Struts
+•	Provides Production Ready Application (Dependencies and Configuration) 
+•	Integrated Embedded Tomcat – You can run your project on any JVM
+•	Spring Boot starter web OR Spring Boot starter jdbc, NO XML FILE, just Application.Properties
+Dependency Injection: It’s a design pattern:
+Loosely Coupled: One object is NOT totally dependent on another object
+public class Laptop {
+	
+	public void space() {
+		HardDrive obj = new HitachiHD(;)
+	}
+
+}
+Here HardDrive Object is totally dependent on HitachiHD
+We can make this loosely coupled by using some sort of service. DIC (Dependency Injection Containers are responsible for creating objects for you and they will be injecting the object in your class)
+Loose Coupling: Object declared as @Autowired can be coupled to Class declared as @Component
+Spring Starter Project in STS >> will download project from start.spring.io
+@SpringBootApplication
+public class SprBotDem1Application {
+
+	public static void main(String[] args) {
+		ConfigurableApplicationContext  context = 
+				SpringApplication.run(SprBotDem1Application.class, args);
+		
+		Student stud = context.getBean(Student.class);
+		
+	}
+}
+context: Will give the container
+getBean: will give you the object of student
+@Component: Annotation will give you Spring Bean
+Spring Framework is injecting the object in your application. Called as Dependency Injection
+package com.example.demo;
+
+public class Student 
+{
+    private String name;
+    private int roll;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getRoll() {
+		return roll;
+	}
+	public void setRoll(int roll) {
+		this.roll = roll;
+	}
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", roll=" + roll + "]";
+	}
+}
+
+Singleton Design Pattern
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Student 
+{
+    private String name;
+    private int roll;
+    
+    
+	public Student() {
+		super();
+		System.out.println("Object Created ....");
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getRoll() {
+		return roll;
+	}
+	public void setRoll(int roll) {
+		this.roll = roll;
+	}
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", roll=" + roll + "]";
+	}
+	
+	public void show()
+	{
+		System.out.println("Generate Bean by using Component...");
+	}
+
+package com.example.demo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class SprBotDem1Application {
+
+	public static void main(String[] args) {
+		ConfigurableApplicationContext  context = 
+				SpringApplication.run(SprBotDem1Application.class, args);
+		
+	}
+}
+In above Example, Object will be created only once
+@SpringBootApplication
+public class SprBotDem1Application {
+
+	public static void main(String[] args) {
+		ConfigurableApplicationContext  context = 
+				SpringApplication.run(SprBotDem1Application.class, args);
+		
+ 		Student stud = context.getBean(Student.class);
+		
+	}
+}
+Again Just once
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class SprBotDem1Application {
+
+	public static void main(String[] args) {
+		ConfigurableApplicationContext  context = 
+				SpringApplication.run(SprBotDem1Application.class, args);
+		
+ 		Student stud = context.getBean(Student.class);
+ 		Student stud1 = context.getBean(Student.class);
+	}
+}
+Again Just once
+@Component
+@Scope(value="prototype")
+public class Student 
+{
+    private String name;
+    private int roll;
+    
+    
+	public Student() {
+		super();
+		System.out.println("Object Created ....");
+	}
+	public String getName() {
+		return name;
+	}
+In above example, object will be created two times.
+The moment you launch the app, object will be ready for you: SDP
+Loose Coupling: Object declared as @Autowired can be coupled to Class declared as @Component
+package com.example.demo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+@Component
+public class Student 
+{
+    private String name;
+    private int roll;
+    @Autowired
+    private Laptop laptop;
+    public Student() {
+		super();
+		System.out.println("object created ....");
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getRoll() {
+		return roll;
+	}
+	public void setRoll(int roll) {
+		this.roll = roll;
+	}
+	public Laptop getLaptop() {
+		return laptop;
+	}
+	public void setLaptop(Laptop laptop) {
+		this.laptop = laptop;
+	}
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", roll=" + roll + "]";
+	}
+	public void show()
+	{
+		System.out.println("Generate Bean by using Component...");
+		laptop.disp();
+	}
+}
+
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Laptop {
+
+	private String brand;
+	private String name;
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	@Override
+	public String toString() {
+		return "Laptop [brand=" + brand + ", name=" + name + "]";
+	}
+	
+	public void disp()
+	{
+		System.out.println("In Laptop Class..");
+	}
+	 
+}
+package com.example.demo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+@SpringBootApplication
+public class SprBotDem1Application {
+     public static void main(String[] args) {
+		ConfigurableApplicationContext  context = 
+				SpringApplication.run(SprBotDem1Application.class, args);
+		Student stud = context.getBean(Student.class);
+ 		stud.show();
+ 	}
+}
+
+To get the JSP Page returned as String type, we need to add Tomcat Jasper dependency 
+<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-jasper</artifactId>
+    <version>8.5.34</version>
+</dependency>
+application.properties
+spring.mvc.view.prefix=/pages/
+spring.mvc.view.suffix=.jsp
+While working with Spring Boot, your jsp page has to be there in webapp folder. This is auto configuration feature of spring boot.
+It you will not add tomacat jasper dependencies, you will get jsp as download
+
+
+
+
+
+package com.example.demo;
+
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class HomeController 
+{   
+	@RequestMapping("addIt")
+	public ModelAndView showme(@RequestParam("t1") String name,HttpServletRequest request,HttpServletResponse response) throws IOException 
+	{
+		ModelAndView mv = new ModelAndView();
+	    mv.setViewName("display");
+	    mv.addObject("mname", name);		
+	    System.out.println(mv.toString());
+	     return mv;
+	}
+}
+
+
+Spring Data JPA makes all CRUD Operations easy.
+public interface StudRepo extends CrudRepository<Student, Integer>
+{
+    
+}
+Auto Configuration: 
+spring.h2.console.enabled=true
+spring.datasource.platform=h2
+spring.datasource.url=jdbc:h2:mem:reposted
+
+Auto reload prehand sql : data.sql
+
+Customize Results : 
+public interface StudRepo extends CrudRepository<Student, Integer>
+{
+    List<Student> findByTech(String tech);
+	
+}
+
+public interface StudRepo extends CrudRepository<Student, Integer>
+{
+    List<Student> findByTech(String tech);
+    List<Student> findByRollGreaterThan(int roll);
+    
+    @Query("from student where roll > ?1 order by tech")
+    List<Student> findByRollSorted(int roll);
+	
+}
+
+Rest Services : URL Pattern : 
+http://localhost:8080/showall/104
+package com.example.demo;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class HomeController 
+{
+	@Autowired
+	StudRepo repo;
+
+	@RequestMapping("addstud")
+	public String addstud(Student stud)
+	{
+		repo.save(stud);
+		return "index.jsp";
+	}
+	@RequestMapping("showall")
+	@ResponseBody
+	public String showall(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
+	{
+		Iterable<Student> stu = repo.findAll();
+		return stu.toString();
+	}
+	@RequestMapping("showall/{roll}")
+	@ResponseBody
+	public String showbyid(@PathVariable("roll") int roll) 
+	{
+	   Student s = repo.findById(roll).get();
+	   return s.toString();
+	}	
+}
+
+CrudRepository Interface Vs JPARepository
+CrudRepository: findall() returns Iterable
+JPARepository : findall() returns List
+@RequestMapping("students")
+@ResponseBody   >> Don’t search for view name, directly print the data
+
+
+
+JpaRepository<T, ID> extends PagingAndSortingRepository
+PagingAndSortingRepository<T, ID> extends CrudRepository
+
+Jackson dependency is responsible for returning List to xml data
+Jackson Dataformat XML from JSON to XML
+
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-xml</artifactId>
+    <version>2.9.7</version>
+</dependency>
+
+Default spring Boot is xml
+
+
+Restrict Data in Particular Format 
+@RequestMapping(path="showall",produces= {"application/xml"})
+	@ResponseBody
+	public List<Student> showall()
+	{
+		return repo.findAll();
+	}
+@PostMapping(path="showall",consumes= {"application/xml"})
+
+
+
+SPRING BOOT JB
+Spring Boot Creates Stand Alone, Production ready spring applications that you can just run.
+
+DI, Enterprise Java App, Application Framework , Focus on building your business problems
+Infrastructure Support – Connecting to DB
+
+Problems: Multiple setup steps / configuration  steps
+Multiple Build and Deploy Steps
+
+Spring Features: Dependency Injection, POJO, MVC, REST, Security, AOP, Data, Batch
+•	Can be integrated with Hibernate, Struts
+•	Provides Production Ready Application (Dependencies and Configuration) 
+•	Integrated Embedded Tomcat – You can run your project on any JVM
+•	Spring Boot starter web OR Spring Boot starter jdbc, NO XML FILE, just Application.Properties
+
+SpringApplication.run(ClassName.class, args)
+
+1.	SetUp Default Configuration
+2.	Starts Spring App Context(a container)
+3.	Class Path Scan @Service, @Controller
+4.	Starts the Tomcat Server
+Stand Alone(Spring Boot will automatically start the servlet container
+
+pom.xml in STS
+
+<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.2.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+</parent>
+Tells us what versions of Jars to download
+<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+Tells us what Jars to download
+Version of parents tells what are the different combinations of versions that do work well
+
+Embedded Tomcat Server:
+1.	Servlet container config is now application config(settings other than default is provded by Spring Boot)
+2.	Stand Alone app(Embedded Tomcat)
+Easy to Deploy, Easy to run and develop, >> One of the goal of Spring Boot Project 
+3.	Useful for Micro service architecture(due to stand alone app)
+4.	Continence
+
+How Spring Boot Work?
+
+ 
+
+
+
+Common application properties
+https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+@RequestBody
+Enabling automatic deserialization of the inbound HttpRequest body onto a Java object.
+Generally used with @PostMapping
+@PostMapping("/request")
+
+public ResponseEntity postController(@RequestBody LoginForm loginForm) {
+  
+    exampleService.fakeAuthenticate(loginForm);
+    return ResponseEntity.ok(HttpStatus.OK);
+}
+
+
+
+
+@ResponseBody
+Automatically serialized into JSON and passed back into the HttpResponse object.
+@ResponseBody(Retun me data not JSP)
+public String getStudents()
+{
+return repo.getStuds();     >> It’s not JSP Page. By default it will try to retrun the JSP page by this name.
+}
+
+
+Spring Boot JB Revision 
+Creating Maven Projetc
+<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.3.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+</parent>
+
+Version of Parent decides compatible dependencies for other jars  >> Bill of  Material
+What is Maven BOM?
+BOM stands for Bill Of Materials. A BOM is a special kind of POM that is used to control the versions of a project’s dependencies and provide a central place to define and update those versions.
+
+Embeded Tomcat : Servlet configuration is now part of application configuration
+Spring MVC(in Boot App)  will do the class path scan and return the response based on what the request is?
+
+
+Our project is the child of Parent Project and it will inherit the properties of Parent project
+Update JRE System Library to 1.8
+<properties>
+	<java.version>1.8</java.version>
+</properties>
+
+@SpringBootApplication
+SpringApplication.run(TestJbBootApplication.class, args);  
+Static method of SpringApplication
