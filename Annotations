@@ -12,3 +12,25 @@ public class HomeController {
 	    return mv;
 	}
 }
+
+
+Sending form Data in Spring Boot app:
+
+package com.example.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class HomeController {
+
+	@RequestMapping("/home")
+	public ModelAndView home(Students studs)
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("obj",studs);
+		mv.setViewName("home");
+		return mv;
+	}
+}
