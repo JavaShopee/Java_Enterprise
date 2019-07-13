@@ -1,0 +1,14 @@
+@RequestMapping
+
+@Controller
+public class HomeController {
+
+	@RequestMapping("/home")
+	public ModelAndView  home(@RequestParam("name") String name)
+	{	  
+      ModelAndView mv = new ModelAndView();
+	    mv.addObject("name",name);
+	    mv.setViewName("home");
+	    return mv;
+	}
+}
