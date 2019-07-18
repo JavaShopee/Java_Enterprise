@@ -20,6 +20,7 @@ compile(generates .class)
 test(test cases)
 package(package all class files)
 install(install artifact/package into local maven repo)
+deploy(doen't deploy to server, deploy artifact/package into local maven repo)
 
 If all three phases executes, then package happens.
 package phase will first run >> validate >> compile >> test
