@@ -1,0 +1,25 @@
+What is Maven ?
+Build tool
+Project Mgt Tool >> Helps in generating reports, DI
+
+Common Problems  : Multiple Jars, Dependencies and Version, Project Structure,  Building , Publishing and Deploying
+
+>>mkdir newdir
+>> mvn archetype:generate
+
+Output is : Folder str , pom.xml
+
+move to the folder where we have pom.xml
+>>mvn compile
+>>mvn package
+
+
+Maven Build  Phases : 
+validate(checks for proper ordering)
+compile(generates .class)
+test(test cases)
+package(package all class files)
+install(install artifact/package into local maven repo)
+
+If all three phases executes, then package happens.
+package phase will first run >> validate >> compile >> test
