@@ -34,3 +34,28 @@ public class HomeController {
 		return mv;
 	}
 }
+***************************************************************************************
+@RequestBody
+
+Automatic deserilization of HTTPRequestBody onto a java object.Generally used with @PostMapping annotation.
+enabling automatic deserialization of the inbound HttpRequest body onto a Java object.
+
+@PostMapping("/request")
+public ResponseEntity postController(
+  @RequestBody LoginForm loginForm) {
+  
+    exampleService.fakeAuthenticate(loginForm);
+    return ResponseEntity.ok(HttpStatus.OK);
+}
+@ResponseBody
+
+@ResponseBody annotation tells a controller that the object returned is automatically serialized into JSON
+and passed back into the HttpResponse object.
+
+@RequestMapping("/stud")
+@ResponseBody
+public List<Students> findAll()
+	{
+		return repo.findAll();
+	}
+
