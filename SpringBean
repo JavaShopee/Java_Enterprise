@@ -1,0 +1,3 @@
+Spring Bean
+
+Spring has a bean factory, that referes to xml config file. The bean factory is responsible for creating required beans for us.
