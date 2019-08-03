@@ -7,8 +7,13 @@ The default behaviour  : The creation of bean(after referring to spring.xml) hap
 NOT WHEN THE GETBEAN METHOD IS CALLED
 When getbean happesn, AC handsover the bean that are already created ==>> Scopes
 
-Singleton >> It's default, only one obj is created even with multiple getBean()
+Singleton >> It's default
 Prototype  >> Create a new bean with every new geatBean()
+
+Web aware context bean scopes :
+Request : New bean per servelt request
+Session : New Bean per session 
+Global Session : New Bean per global Http Session(portlet context)
 
 Setter and Constructor Injection :
 
