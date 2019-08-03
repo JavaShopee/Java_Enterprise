@@ -2,6 +2,14 @@ Spring Bean
 
 Spring has a bean factory, that referes to xml config file. The bean factory is responsible for creating required beans for us.
 
+: 
+The default behaviour  : The creation of bean(after referring to spring.xml) happens when application context is being initialized 
+NOT WHEN THE GETBEAN METHOD IS CALLED
+When getbean happesn, AC handsover the bean that are already created ==>> Scopes
+
+Singleton >> It's default, only one obj is created even with multiple getBean()
+Prototype  >> Create a new bean with every new geatBean()
+
 Setter and Constructor Injection :
 
 <?xml version="1.0" encoding="UTF-8"?>
