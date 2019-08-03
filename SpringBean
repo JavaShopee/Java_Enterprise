@@ -319,12 +319,92 @@ public class Triangle implements ApplicationContextAware, BeanNameAware
 
 
 
-*******************************************************************************************************************************
+**************************InitializingBean, DisposableBean LifeCycle Hook***************************************************************************************
+
+
+
+package com.demo.sample;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+public class Triangle implements InitializingBean, DisposableBean
+{
+
+	private Points pointA;
+	private Points pointB;
+	private Points pointC;
+	public Points getPointA() {
+		return pointA;
+	}
+	public void setPointA(Points pointA) {
+		this.pointA = pointA;
+	}
+	public Points getPointB() {
+		return pointB;
+	}
+	public void setPointB(Points pointB) {
+		this.pointB = pointB;
+	}
+	public Points getPointC() {
+		return pointC;
+	}
+	public void setPointC(Points pointC) {
+		this.pointC = pointC;
+	}
+	@Override
+	public void destroy() throws Exception {
+		System.out.println("Call me bfore destroying");
+		
+	}
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("Call me once properties are set");
+		
+	}
+	
+	public void init()
+	{
+		System.out.println("Initialize Customized Method");
+	}
+	public void dest()
+	{
+		System.out.println("Destroy Customized Method");
+	}
+	
+	public void draw()
+	{
+		System.out.println(getPointA().getX() + " " + getPointA().getY());
+		System.out.println(getPointB().getX() + " " + getPointB().getY());
+		System.out.println(getPointC().getX() + " " + getPointC().getY());
+	}
+}
 
 
 
 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+   <bean id="triangle" class="com.demo.sample.Triangle" autowire="byName" init-method="init" destroy-method="dest">
+   </bean>
+   
+   <bean id="pointA" class="com.demo.sample.Points">
+     <property name="x" value="0"></property>
+     <property name="y" value="0"></property>
+   </bean>
+   <bean id="pointB" class="com.demo.sample.Points">
+     <property name="x" value="20"></property>
+     <property name="y" value="0"></property>
+   </bean>
+   <bean id="pointC" class="com.demo.sample.Points">
+     <property name="x" value="-20"></property>
+     <property name="y" value="0"></property>
+   </bean>
 
+</beans>
+*****************************************************************************************************************************
 
 
 
