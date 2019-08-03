@@ -224,6 +224,61 @@ Autowire By Constructor  : When bean type  = property type
 
 
 
+Application Context Aware
+When parent bean happes to be singleton whereas children happes to be prototype, child will get initiliazed as soon as ApplicationContext 
+is initialized.
+In that case we need to have hold on Application Context. 
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
+public class Triangle implements ApplicationContextAware, BeanNameAware
+{
+	
+	private Points pointA;
+	private Points pointB;
+	private Points pointC;
+	ApplicationContext context;
+	String bean;
+	
+	
+	public Points getPointA() {
+		return pointA;
+	}
+	public void setPointA(Points pointA) {
+		this.pointA = pointA;
+	}
+	public Points getPointB() {
+		return pointB;
+	}
+	public void setPointB(Points pointB) {
+		this.pointB = pointB;
+	}
+	public Points getPointC() {
+		return pointC;
+	}
+	public void setPointC(Points pointC) {
+		this.pointC = pointC;
+	}
+	public void draw()
+	{
+		System.out.println(getPointA().getX() + " " + getPointA().getY());
+		System.out.println(getPointB().getX() + " " + getPointB().getY());
+		System.out.println(getPointC().getX() + " " + getPointC().getY());
+		
+	}
+	@Override
+	public void setApplicationContext(ApplicationContext context) throws BeansException {
+		this.context = context;
+	}
+	@Override
+	public void setBeanName(String bean) {
+		System.out.println(bean);
+	}
+	
+}
 
 
 
