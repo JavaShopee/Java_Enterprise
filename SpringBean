@@ -1,5 +1,7 @@
 Spring Bean
 
+
+
 Spring has a bean factory, that referes to xml config file. The bean factory is responsible for creating required beans for us.
 
 
@@ -80,4 +82,34 @@ public class CreateBean
     	triangle1.draw();
     }
 }
+
+
+
+One Bean is dependent on another bean :
+
+<beans>
+
+    <bean id="triangle" class="com.sachin.demo.Triangle">
+		<property name="pointA" ref="pointa"></property>
+		<property name="pointB" ref="pointb"></property>
+		<property name="pointC" ref="pointc"></property>
+    </bean>
+    
+	<bean id="pointa" class="com.sachin.demo.Point">
+		<property name="x" value="0"></property>
+		<property name="y" value="0"></property>
+    </bean>
+    
+    <bean id="pointb" class="com.sachin.demo.Point">
+		<property name="x" value="20"></property>
+		<property name="y" value="0"></property>
+    </bean>
+    
+    <bean id="pointc" class="com.sachin.demo.Point">
+		<property name="x" value="-20"></property>
+		<property name="y" value="0"></property>
+    </bean>
+	
+
+</beans>
 https://www.youtube.com/watch?v=GB8k2-Egfv0&list=PLGibysfsUS7NAbefiaj1V4LbX0glTftDI
