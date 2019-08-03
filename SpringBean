@@ -1,3 +1,82 @@
 Spring Bean
 
 Spring has a bean factory, that referes to xml config file. The bean factory is responsible for creating required beans for us.
+
+
+
+Setter and Constructor Injection :
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+     <bean id="triangle" class="org.frame.sachin.Triangle">
+        <!--     <property name="shape" value="Equilateral"></property> -->
+        <!--   <constructor-arg type="java.lang.String" value="Equi"></constructor-arg>
+               <constructor-arg type="int" value="20"></constructor-arg> -->
+        
+         <constructor-arg index="0" value="Equi"></constructor-arg>
+        <constructor-arg index="1" value="20"></constructor-arg>
+        
+        
+     </bean>
+
+</beans>
+
+  
+package org.frame.sachin;
+
+public class Triangle {
+
+	private String shape;
+	private int height;
+	public Triangle(String shape, int height) {
+		super();
+		this.shape = shape;
+		this.height = height;
+	}
+//	public String getShape() {
+//		return shape;
+//	}
+//	public void setShape(String shape) {
+//		this.shape = shape;
+//	}
+//	public int getHeight() {
+//		return height;
+//	}
+//	public void setHeight(int height) {
+//		this.height = height;
+//	}
+	
+	
+	public void draw()
+	{
+		System.out.println(shape + " " + height );
+	}
+}
+
+
+
+package org.frame.sachin;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.FileSystemResource;
+
+public class CreateBean 
+{
+    public static void main(String[] args) 
+    {
+//    	BeanFactory factory = new XmlBeanFactory(new FileSystemResource("spring.xml"));
+//    	Triangle triangle = (Triangle) factory.getBean("triangle");
+//    	triangle.draw();
+		
+    	ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    	Triangle triangle1 = (Triangle) context.getBean("triangle");
+    	triangle1.draw();
+    }
+}
