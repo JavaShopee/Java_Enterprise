@@ -404,32 +404,111 @@ public class Triangle implements InitializingBean, DisposableBean
    </bean>
 
 </beans>
-*****************************************************************************************************************************
+**********************BeanPostProcessor Before and after Initilizing each and every bean*********************************
+
+
+package com.demo.sample;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+
+public class DispalyBeanName implements BeanPostProcessor
+{
+
+	@Override
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		System.out.println("postProcessAfterInitialization" + beanName);
+		return bean;
+		
+	}
+
+	@Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		System.out.println("postProcessBeforeInitialization" + beanName);
+		return bean;
+	}
+
+}
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+   <bean id="triangle" class="com.demo.sample.Triangle" autowire="byName" init-method="init" destroy-method="dest">
+   </bean>
+   
+   <bean id="pointA" class="com.demo.sample.Points">
+     <property name="x" value="0"></property>
+     <property name="y" value="0"></property>
+   </bean>
+   <bean id="pointB" class="com.demo.sample.Points">
+     <property name="x" value="20"></property>
+     <property name="y" value="0"></property>
+   </bean>
+   <bean id="pointC" class="com.demo.sample.Points">
+     <property name="x" value="-20"></property>
+     <property name="y" value="0"></property>
+   </bean>
+   
+   <bean class="com.demo.sample.DispalyBeanName"></bean>
+
+</beans>
+
+
+
+
+********************BeanFactoryPostProcessor pre Instantiate Singleton********************************************************************
+
+
+package com.demo.sample;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+
+public class FactDemo implements BeanFactoryPostProcessor
+{
+
+	@Override
+	public void postProcessBeanFactory(ConfigurableListableBeanFactory arg0) throws BeansException {
+		System.out.println("postProcessBeanFactory method is called");
+		
+	}
+
+}
 
 
 
 
 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<bean id="triangle" class="com.demo.sample.Triangle" autowire="byName">
+	</bean>
+
+	<bean id="pointA" class="com.demo.sample.Points">
+		<property name="x" value="0"></property>
+		<property name="y" value="0"></property>
+	</bean>
+	<bean id="pointB" class="com.demo.sample.Points">
+		<property name="x" value="20"></property>
+		<property name="y" value="0"></property>
+	</bean>
+	<bean id="pointC" class="com.demo.sample.Points">
+		<property name="x" value="-20"></property>
+		<property name="y" value="0"></property>
+	</bean>
+
+	<bean class="com.demo.sample.FactDemo"></bean>
+
+</beans>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+******************************************************************************************************************************
 
 
 
