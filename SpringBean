@@ -715,8 +715,89 @@ public class Circle
 	}
 }
 
-******************************************************************************************************************************
+***************************Apache Derby JDBC Conn***************************************************************************************************
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class JDBCImpl 
+{
+	public Circle getCircle(int id){
+
+		Connection conn = null;
+		Circle circle = null;
+		try{
+			String driver = "org.apache.derby.jdbc.ClientDriver";
+			Class.forName(driver).newInstance();
+			conn=DriverManager.getConnection("jdbc:derby://localhost:1527/db");
+			PreparedStatement ps = conn.prepareStatement("select * from circle where id = ?");
+			ps.setInt(1,id);
+
+			
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				circle = new Circle(id,rs.getString("name"));
+			}
+			rs.close();
+			ps.close();
+			
+			
+		}
+		catch(Exception e){
+		}
+		finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return circle;
 
 
+	}
+}
+
+public class Circle {
+	
+	private int id;
+	private String name;
+	
+	public Circle(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+
+
+public class JDBCDemo 
+{
+  public static void main(String[] args) {
+	
+	  
+	  Circle circle = new JDBCImpl().getCircle(1);
+	  System.out.println(circle.getName());
+	  
+ }
+}
 
 https://www.youtube.com/watch?v=GB8k2-Egfv0&list=PLGibysfsUS7NAbefiaj1V4LbX0glTftDI
