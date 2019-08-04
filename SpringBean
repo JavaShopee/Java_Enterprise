@@ -649,15 +649,38 @@ public class Circle
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean> -->
 </beans>
 
-********************************************************************************************************************
+**************************************JSR 250 Annotations********************************************************************
+
+public class Circle 
+{
+    private Points center;
+
+	public Points getCenter() {
+		return center;
+	}
+	@Resource(name = "pointA")
+	public void setCenter(Points center) {
+		this.center = center;
+	}
+	public void draw()
+	{
+		System.out.println(getCenter().getX() + " " + getCenter().getY());
+	}
+	@PostConstruct
+	public void init()
+	{
+		
+	}
+	@PreDestroy
+	public void dest()
+	{
+		
+	}
+}
 
 
 
-
-
-
-
-
+**********************************************************************************************************************************
 
 
 
