@@ -680,8 +680,42 @@ public class Circle
 
 
 
-**********************************************************************************************************************************
+**************************Disadvantege of Annotation*******************************************************************
+We can't have different instances of the bean for the same class.
+<context:component-scan base-package=""></context:component-scan> tells spring to can classses marked as @Component 
+and treat them as Spring Bean.
 
+@Component and other stereotype annotations  like : @Controller, @Service, @Repository
+
+@Component
+public class Circle 
+{
+    private Points center;
+
+	public Points getCenter() {
+		return center;
+	}
+	@Resource(name = "pointA")
+	public void setCenter(Points center) {
+		this.center = center;
+	}
+	public void draw()
+	{
+		System.out.println(getCenter().getX() + " " + getCenter().getY());
+	}
+	@PostConstruct
+	public void init()
+	{
+		
+	}
+	@PreDestroy
+	public void dest()
+	{
+		
+	}
+}
+
+******************************************************************************************************************************
 
 
 
