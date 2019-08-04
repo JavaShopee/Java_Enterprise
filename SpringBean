@@ -588,16 +588,68 @@ public class Circle
 
 
 
-**********************************************************************************************************
+****************Autowired Qualifier********************************************************************************
 
 
 
+package com.sample.demo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+public class Circle 
+{
+    private Points center;
+
+	public Points getCenter() {
+		return center;
+	}
+
+	@Autowired
+	@Qualifier("myCenter")
+	public void setCenter(Points center) {
+		this.center = center;
+	}
+	
+	public void draw()
+	{
+		System.out.println(getCenter().getX() + " " + getCenter().getY());
+	}
+}
 
 
 
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+	<bean id="circle" class="com.sample.demo.Circle">
 
+	</bean>
 
+	<bean id="pointA" class="com.sample.demo.Points">
+		<qualifier value="myCenter"></qualifier>
+		<property name="x" value="0"></property>
+		<property name="y" value="0"></property>
+	</bean>
+	<bean id="pointB" class="com.sample.demo.Points">
+		<property name="x" value="20"></property>
+		<property name="y" value="0"></property>
+	</bean>
+	<bean id="pointC" class="com.sample.demo.Points">
+		<property name="x" value="-20"></property>
+		<property name="y" value="0"></property>
+	</bean>
 
+    <context:annotation-config></context:annotation-config>
+	<!-- <bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean> -->
+</beans>
+
+********************************************************************************************************************
 
 
 
