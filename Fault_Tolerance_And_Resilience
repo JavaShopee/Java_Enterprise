@@ -1,1 +1,4 @@
 
+Fault Tolerance : How much tolerance does the system have for a specific fault
+
+Resilience : How many fault can a system tolerance before it broken down
