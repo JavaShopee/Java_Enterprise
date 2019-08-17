@@ -822,3 +822,13 @@ spring-cloud-starter-netflix-eureka-server
    {
        return new   RestTemplate();
    }
+   
+   
+   
+@LoadBalanced
+Used as a marker annotation on annotated RestTemplate 
+allows you to use "logical identifiers" for the URLs you pass to the RestTemplate. 
+These logical identifiers are typically the name of a service. 
+For example:
+
+restTemplate.getForObject("http://some-service-name/user/{id}", String.class, 1);
