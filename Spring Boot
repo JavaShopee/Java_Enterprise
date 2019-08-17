@@ -787,3 +787,38 @@ Update JRE System Library to 1.8
 @SpringBootApplication
 SpringApplication.run(TestJbBootApplication.class, args);  
 Static method of SpringApplication
+
+
+
+Worked on discovering microservices in spring boot application through eureka server
+
+1. Create Instance of Rest Templates that will take uri(from other services) as param
+RestTemplate restTemplate = new RestTemplate();
+		UserRating userRating = restTemplate.getForObject("http://RATINGS-DATA-SERVICE/ratingsdata/users/"+userId,UserRating.class);
+	    System.out.println("Hello " + userRating);
+		
+		
+		return userRating.getRatings().stream()
+                .map(rating -> {
+                    Movie movie = restTemplate.getForObject("http://MOVIE-INFO-SERVICE/movie/"+rating.getMovieId(), Movie.class);
+                    return new CatalogItem(movie.getName(), movie.getDescription(), rating.getRating());
+                })
+                .collect(Collectors.toList());
+
+
+
+2. Dependencies
+spring-cloud-starter-netflix-eureka-client
+spring-cloud-starter-netflix-eureka-server
+
+3. @EnableEurekaClient
+@EnableEurekaServer
+
+
+
+4. @Bean
+   @LoadBalanced
+   public RestTemplate getRestTemplate()
+   {
+       return new   RestTemplate();
+   }
