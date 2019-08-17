@@ -832,3 +832,5 @@ These logical identifiers are typically the name of a service.
 For example:
 
 restTemplate.getForObject("http://some-service-name/user/{id}", String.class, 1);
+
+If we have 2 diff instances of same mc running at 2 diff ports, it pick up anyone ramdomly>> Client Side LB
