@@ -84,5 +84,16 @@ public List<Students> findAll()
 	}
 	
 	
-********************************************************************************************************************	
-	
+******************Query and Repo **************************************************************************************************	
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface StudRepo extends JpaRepository<Students, Integer>
+{
+    List<Students> findByTech(String tech);
+     
+     @Query("from Students where tech=?1 order by name")
+     List<Students> findByTechSorted(String tech);
+
