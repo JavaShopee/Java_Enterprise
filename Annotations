@@ -83,7 +83,7 @@ public List<Students> findAll()
 		return mv;
 	}
 	
-	
+RequestParam is JSP/Servlet based , try to serach query paramters in URL	
 ******************Query and Repo **************************************************************************************************	
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -97,3 +97,14 @@ public interface StudRepo extends JpaRepository<Students, Integer>
      @Query("from Students where tech=?1 order by name")
      List<Students> findByTechSorted(String tech);
 
+*********************************Path Variable************************************************************************
+@RequestMapping("/find/{roll}")
+	@ResponseBody
+	public Students findMe(@PathVariable("roll") int roll)
+	{
+		return repo.findById(roll).get();
+	}
+	
+PathVariable is REST Annotation
+RequestParam  is JSP /Servlet
+*************************************************************************************************************************
