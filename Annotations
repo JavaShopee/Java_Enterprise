@@ -59,3 +59,18 @@ public List<Students> findAll()
 		return repo.findAll();
 	}
 
+******************************************************Request Param*************************************
+
+
+@RequestMapping("/home")
+	public ModelAndView home(@RequestParam("name") String name)
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("sample.jsp");
+		mv.addObject("name",name);
+		return mv;
+	}
+	
+	
+********************************************************************************************************************	
+	
