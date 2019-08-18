@@ -34,6 +34,18 @@ public class HomeController {
 		return mv;
 	}
 }
+
+
+With Just a Model class, here Students is model class
+
+@RequestMapping("/home")
+	public ModelAndView getStuds(Students stud)
+	{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("sample.jsp");
+		mv.addObject("studs",stud);
+		return mv;
+	}
 ***************************************************************************************
 @RequestBody
 
