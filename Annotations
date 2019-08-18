@@ -107,4 +107,14 @@ public interface StudRepo extends JpaRepository<Students, Integer>
 	
 PathVariable is REST Annotation
 RequestParam  is JSP /Servlet
-*************************************************************************************************************************
+*********************************************Post MApping/ Requets Body**************************************
+@PostMapping(path="/addme")
+	@ResponseBody
+	public Students GetIt(@RequestBody Students stud)
+	{
+		 repo.save(stud);
+		 return stud;
+	}
+	
+	
+****************************************************************************************************************************
