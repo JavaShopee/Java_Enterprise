@@ -1,0 +1,28 @@
+Hypermedia As The Engine Of Application State
+
+package com.example.demo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+@RepositoryRestResource(collectionResourceRel = "/studs" , path = "/studs")
+public interface StudsRepo extends JpaRepository<Students, Integer>
+{
+
+}
+
+
+
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RstImplApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(RstImplApplication.class, args);
+	}
+
+}
