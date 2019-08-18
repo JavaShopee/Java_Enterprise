@@ -1,0 +1,8 @@
+IN Rest
+
+@RequestMapping(path = "/find" , produces = {"application/json"})
+	@ResponseBody
+	public List<Students> findAll()
+	{
+		return repo.findAll();
+	}
