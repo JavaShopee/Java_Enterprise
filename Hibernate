@@ -1,0 +1,142 @@
+Annotations
+
+@Table, @Transient, @Column 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Columns;
+
+@Entity
+@Table(name = "Students_Recs")
+public class Students 
+{
+
+	@Id
+	private int sid;
+	@Column(name = "stud_name")
+	private String sname;
+	@Transient
+	private String sroll;
+	public int getSid() {
+		return sid;
+	}
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+	public String getSroll() {
+		return sroll;
+	}
+	public void setSroll(String sroll) {
+		this.sroll = sroll;
+	}
+	
+	
+	
+}
+
+
+package com.demo.hibo.HiberDem;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+public class NewHibo
+{
+    public static void main(String[] args) 
+    {
+		Configuration conf = new Configuration().configure().addAnnotatedClass(Students.class);
+    	SessionFactory sf = conf.buildSessionFactory();
+    	Session session = sf.openSession();
+    	
+    	Students studs = new Students();
+    	studs.setSid(101);
+    	studs.setSname("Sachin");
+    	studs.setSroll("1011");
+    	
+    	Transaction tx = session.beginTransaction();
+    	
+    	session.save(studs);
+    	
+    	tx.commit();
+    }  
+}
+
+hibernate.cfg.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.password">sachin</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/testdb</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<property name="hbm2ddl.auto">create</property>
+		<property name="show_sql">true</property>
+	</session-factory>
+</hibernate-configuration>
+
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.demo.hibo</groupId>
+	<artifactId>HiberDem</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>HiberDem</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.0.0.Alpha2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.17</version>
+</dependency>
+
+
+	</dependencies>
+</project>
