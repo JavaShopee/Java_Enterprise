@@ -38,6 +38,8 @@ public class HomeController {
 
 With Just a Model class, here Students is model class
 
+
+
 @RequestMapping("/home")
 	public ModelAndView getStuds(Students stud)
 	{
@@ -117,4 +119,37 @@ RequestParam  is JSP /Servlet
 	}
 	
 	
-****************************************************************************************************************************
+*******************************REST Annotations***************************************************************************
+
+
+
+@GET
+	@Produces({javax.ws.rs.core.MediaType.APPLICATION_XML,javax.ws.rs.core.MediaType.APPLICATION_JSON})
+	public List<Students> getStuds()
+	{
+		
+		return repo.getAll();
+	}
+	
+	@GET
+	@Path("/stud/{id}")
+	@Produces({javax.ws.rs.core.MediaType.APPLICATION_XML,javax.ws.rs.core.MediaType.APPLICATION_JSON})
+	public Students getStud(@PathParam("id") int id)
+	{
+		
+		StudsRepo repo = new StudsRepo();
+		return repo.getMe(id);
+	}
+	
+	@POST
+	@Path("/stud")
+	@Consumes({javax.ws.rs.core.MediaType.APPLICATION_XML,javax.ws.rs.core.MediaType.APPLICATION_JSON})
+	public Students addStud(Students stud)
+	{
+		repo.saveStud(stud);
+		return stud;
+	}
+	
+	
+	
+	
