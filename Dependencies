@@ -5,3 +5,12 @@ To support XML in REST App
     <artifactId>jackson-dataformat-xml</artifactId>
     <version>2.9.9</version>
 </dependency>
+
+To support JSON in REST
+
+<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-moxy -->
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-moxy</artifactId>
+			<version>2.27</version>
+		</dependency>
