@@ -195,7 +195,7 @@ Inner Bean
 
 
 
-Autowire By Name : When bean id  = property name 
+Autowire By Name : When bean id  = property name ; No need to use <property> tag explicitly.
 Autowire By Type : When bean type  = property type
 Autowire By Constructor  : When bean type  = property type
 
@@ -799,5 +799,21 @@ public class JDBCDemo
 	  
  }
 }
+
+
+Hibernate Integration with Spring :
+
+<bean id="sessionFactotry" class="org.springframework.orm.hibernate3.annotations.AnnotationSessionFactoryBean>
+   <property id="datasource" ref="" />
+   <property id="packagesToScan" ref="Model Class pakage" />
+   <property name="hibernateProperties>
+          <props>
+	        <prop name="dialect">DerbyDialect</prop>
+          </props>
+</bean>	  
+   
+   
+   
+
 
 https://www.youtube.com/watch?v=GB8k2-Egfv0&list=PLGibysfsUS7NAbefiaj1V4LbX0glTftDI
