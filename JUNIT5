@@ -1,1 +1,15 @@
 
+It's not just verifying that code works now, you are providing the facility that code works in future.
+
+JNUIT 4 > 10 Years
+Not been updated with newer testing pattterns.
+It has been updated with new language features(Java has evolved significannlty in last 10 yes)
+Monolithic architecture
+Bugs piled up in Junit 4
+
+PLATFORM(Engine what runs the test cases)
+Jupiter is an API whcih informs the Engine what test to run, how to run
+Vintage : Backword compatibility with JUnit 4
+Extenstions : Creating your own extenstion and have the platform to run the tests
+
+Programmet can either use  PLATFORM + Jupiter OR PLATFORM + Vintage or PLATFORM + Extensions to write the test cases.
