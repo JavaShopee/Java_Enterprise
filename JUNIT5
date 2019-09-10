@@ -13,3 +13,12 @@ Vintage : Backword compatibility with JUnit 4
 Extenstions : Creating your own extenstion and have the platform to run the tests
 
 Programmet can either use  PLATFORM + Jupiter OR PLATFORM + Vintage or PLATFORM + Extensions to write the test cases.
+
+
+IDEs uses paltform to run the test cases
+
+
+
+
+
+
