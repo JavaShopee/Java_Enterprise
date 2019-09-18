@@ -19,6 +19,59 @@ IDEs uses paltform to run the test cases
 
 
 
+package com.demo.junit.JunitDemo;
+
+import static org.mockito.Mockito.*;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import junit.framework.TestCase;
+
+public class TestCalc extends TestCase {
+	
+	Calculator calc= null;
+	CalculatorService service = Mockito.mock(CalculatorService.class);
+	
+	@Before
+	public void setUp()
+	{
+		calc = new Calculator(service);
+	}
+	@Test
+	public void testAdd()
+	{
+		when(service.add(2,3)).thenReturn(5);
+		assertEquals(10,calc.perform(2,3));
+	}
+
+}
 
 
+***********************************************
 
+package com.demo.junit.JunitDemo;
+public class Calculator 
+{
+	CalculatorService service;
+  
+  public Calculator(CalculatorService service) {
+		super();
+		this.service = service;
+	}
+
+
+	public int perform(int i, int j)
+	{
+		return service.add(i,j)*i;
+	}
+}
+***********************************************
+package com.demo.junit.JunitDemo;
+
+public interface CalculatorService 
+{
+	int add(int i,int j);
+
+}
