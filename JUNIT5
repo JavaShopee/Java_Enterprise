@@ -87,3 +87,7 @@ assertArrayEquals(expected array, actual array)
 assertIterableEquals(expected array, actual array)
 
 *************************************************
+
+assertThrows(ArithmeticException.class, ()-> utils.divide(1,0));
+
+**************************************************
