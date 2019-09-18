@@ -78,3 +78,12 @@ public interface CalculatorService
 	int add(int i,int j);
 
 }
+
+
+*************************************************
+
+assertEquals(expected, actual)
+assertArrayEquals(expected array, actual array)
+assertIterableEquals(expected array, actual array)
+
+*************************************************
