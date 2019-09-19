@@ -180,7 +180,7 @@ DisplayName can be method level or class level annotation
 
 
 @RepeatedTest(3)
-public void testcomputeCircleArea()
+public void testcomputeCircleArea(Repetitioninfo repetitionInfo)
 {
     assertEquals(315.1592653589793,utils.computeCircleArea(10),1.1);
 }
