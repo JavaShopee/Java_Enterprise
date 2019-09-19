@@ -114,3 +114,24 @@ public void testMe()
 @Disabled : Don't run the test case
 Skip the test case 
 **********************************************
+
+Conditional Execution
+
+@EnabledOnOS(OS.LINUX)
+@EnabledIf
+
+
+assertALL()>> Only in JUnit 5, takes collection of executables as parameter.
+
+@Test
+@DisplayName("Display the name")
+public void testMe()
+{
+   assertALL(
+    ()-> assertEquals(4,utils.multyply(2,2)),
+    ()-> assertEquals(2,utils.multyply(2,1))
+   
+   );
+}
+
+*****************************************
