@@ -185,3 +185,7 @@ public void testcomputeCircleArea(Repetitioninfo repetitionInfo)
     assertEquals(315.1592653589793,utils.computeCircleArea(10),1.1);
 }
 ****************************************
+@Tag("Math")
+@Tag("Circle")
+
+Run Math Tags Only
