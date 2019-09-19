@@ -135,3 +135,45 @@ public void testMe()
 }
 
 *****************************************
+
+@Nested : When you want to group the similar test cases together
+
+public class MathUtilsTests 
+{
+	
+	MathUtils utils = new MathUtils();
+	@Before
+	public void setUp()
+	{
+	   utils = new MathUtils();
+	}
+	@Nested
+	class TestAdd
+	{
+		@Test
+		public void testForPositive()
+		{
+		   assertEquals(11,utils.add(6, 5));
+		}
+		@Test
+		public void testForNegative()
+		{
+		   assertEquals(-2,utils.add(-1, -1));
+		}
+	}
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testcomputeCircleArea()
+	{
+		assertEquals(315.1592653589793,utils.computeCircleArea(10),1.1);
+		
+	}
+	
+	
+	
+}
+
+******************************************
+DisplayName can be method level or class level annotation
+
+****************************************
