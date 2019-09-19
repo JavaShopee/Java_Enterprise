@@ -100,3 +100,17 @@ LifeCycyle Hook
 
 @BeforeEach
 @AfterEach
+
+**********************************************
+Display in place of method name
+
+@Test
+@DisplayName("Display the name")
+public void testMe()
+{
+   assertEquals(11,utils.add(6, 5));
+}
+**********************************************
+@Disabled : Don't run the test case
+Skip the test case 
+**********************************************
