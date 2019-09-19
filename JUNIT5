@@ -91,3 +91,12 @@ assertIterableEquals(expected array, actual array)
 assertThrows(ArithmeticException.class, ()-> utils.divide(1,0));
 
 **************************************************
+
+
+LifeCycyle Hook
+
+@BeforeAll : runs when even the instance is creatd. Therefore, the method has to be static
+@AfterAll : runs when even the instance is destroyed. Therefore, the method has to be static
+
+@BeforeEach
+@AfterEach
