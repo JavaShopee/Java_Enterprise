@@ -31,6 +31,16 @@ public class Students {
 	
 	
 	
+@Entity
+public class TwoWheeler extends Vehicle
+{
+	@OneToMany(cascade=CascadeType.ALL)
+	private String steeringHandle;
+
+1 user with 50 vehicle, session.save(vehicle1,vehicle2) >> avoid >>
+
+	
+	
 Single Table Inheritence
 Discriminator Cloumn, nulls
 
