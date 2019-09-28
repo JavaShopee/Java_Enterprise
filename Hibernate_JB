@@ -17,3 +17,97 @@ public class Students {
   
 	@Lob   >> Large Object
 	private String sname;
+
+
+@AttributeOverrides({
+			@AttributeOverride(name = "addr" , column=@Column(name="Home_Addr")),
+			@AttributeOverride(name = "city" , column=@Column(name="Home_City")),
+			@AttributeOverride(name = "state" , column=@Column(name="Home_State")),
+			@AttributeOverride(name = "zip" , column=@Column(name="Home_Zip"))
+	})
+	
+	
+	private Address address;
+	
+	
+	
+Single Table Inheritence
+Discriminator Cloumn, nulls
+
+
+mysql> select * from vehicle;
++-------------+------+---------+----------------+---------------+
+| DTYPE       | vid  | vname   | steeringHandle | steeringWheel |
++-------------+------+---------+----------------+---------------+
+| Vehicle     | 1000 | Travel  | NULL           | NULL          |
+| TwoWheeler  |  101 | Scooter | Scooter Handle | NULL          |
+| FourWheeler |  102 | Car     | NULL           | Car Handle    |
++-------------+------+---------+----------------+---------------+
+3 rows in set (0.09 sec)
+
+
+Table Per Class
+Parent Class =Parent Class 
+Child Class = Parent Class  + Child Class
+
+
+mysql> select * from vehicle;
++------+--------+
+| vid  | vname  |
++------+--------+
+| 1000 | Travel |
++------+--------+
+1 row in set (0.01 sec)
+
+mysql> select * from twowheeler;
++-----+---------+----------------+
+| vid | vname   | steeringHandle |
++-----+---------+----------------+
+| 101 | Scooter | Scooter Handle |
++-----+---------+----------------+
+1 row in set (0.01 sec)
+
+mysql> select * from fourwheeler;
++-----+-------+---------------+
+| vid | vname | steeringWheel |
++-----+-------+---------------+
+| 102 | Car   | Car Handle    |
++-----+-------+---------------+
+1 row in set (0.01 sec)
+
+
+
+Joined 
+
+Parent Class =Parent Class 
+Child Class = Child Class
+
+Much more normalized than above
+
+mysql> select * from vehicle;
++------+---------+
+| vid  | vname   |
++------+---------+
+| 1000 | Travel  |
+|  101 | Scooter |
+|  102 | Car     |
++------+---------+
+3 rows in set (0.01 sec)
+
+mysql> select * from twowheeler;
++----------------+-----+
+| steeringHandle | vid |
++----------------+-----+
+| Scooter Handle | 101 |
++----------------+-----+
+1 row in set (0.01 sec)
+
+mysql> select * from fourwheeler;
++---------------+-----+
+| steeringWheel | vid |
++---------------+-----+
+| Car Handle    | 102 |
++---------------+-----+
+1 row in set (0.01 sec)
+
+mysql>
