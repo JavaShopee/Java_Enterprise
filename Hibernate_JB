@@ -1,0 +1,19 @@
+@Entity
+public class Students {
+	
+	@Id
+	private int sid;
+	@Lob
+	private String sname;
+	private String sgrade;
+	@Temporal(TemporalType.DATE)
+	private java.util.Date Date;
+  
+  
+  @Temporal(TemporalType.DATE)   >> For Date (Not TS)
+	private java.util.Date Date;
+  
+  
+  
+	@Lob   >> Large Object
+	private String sname;
