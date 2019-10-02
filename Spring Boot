@@ -1,3 +1,5 @@
+
+
 Spring Boot
 •	Spring Framework can integrate with Hibernate and Struts
 •	Spring Boot will give you dependency and configuration
@@ -5,6 +7,11 @@ Spring Boot
 •	Jar files will have embedded tomcat
 •	Class with Auto wired property can be connected to component class	
 •	application.properties
+
+
+In Spring Boot App, default location of JSP pages is src>>main>>webapp>>home.jsp 
+
+
 Spring Starter Project in STS >> will download project from start.spring.io
 Spring framework enables dependency injection using getBean method
 If we want to create spring bean (using getBean method to return the object of class), we have to make class as “Component”
@@ -13,6 +20,9 @@ Singleton Design Pattern: By default spring framework will give you the object. 
 In Singleton Design Pattern, you will get only one obj and that too is prehand(the moment you start your app)
 By default spring frame work uses singleton design pattern: You will get only one instance.
 You have to declare scope value as prototype in order to create multiple instances. . Now if you create multiple instances, it will call make the multiple calls to constructor.
+
+
+
 
 
 Location of JSP
