@@ -8,6 +8,7 @@ NOT WHEN THE GETBEAN METHOD IS CALLED
 When getbean happesn, AC handsover the bean that are already created ==>> Scopes
 
 Singleton >> It's default
+One bean per bean def(in spring.xml) and no matter how many calls are there to getBean(), it's gonna look at that single instance.
 Prototype  >> Create a new bean with every new geatBean()
 
 Web aware context bean scopes :
