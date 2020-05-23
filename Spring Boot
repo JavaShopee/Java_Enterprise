@@ -1,5 +1,12 @@
 
 
+Annotation : @SpringBootApplication:
+Indicates that this is a 
+1. Spring Context File
+2. Enables Auto Configuration
+3. Enables Component Scan
+
+
 Spring Boot
 •	Spring Framework can integrate with Hibernate and Struts
 •	Spring Boot will give you dependency and configuration
