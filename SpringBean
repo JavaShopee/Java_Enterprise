@@ -322,7 +322,9 @@ public class Triangle implements ApplicationContextAware, BeanNameAware
 
 **************************InitializingBean, DisposableBean LifeCycle Hook***************************************************************************************
 
+Call the method when the bean is being initialized.
 
+Call the method when the bean is being destroyed.
 
 package com.demo.sample;
 
